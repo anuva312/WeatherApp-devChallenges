@@ -59,7 +59,34 @@ function App() {
     if (selectedCity) getWeather();
   }, [selectedCity]);
 
-  return <div className="App">Hello World!</div>;
+  return (
+    <div className="App">
+      <div className="sidebar">
+        <div className="sidebar-header">
+          <div className="search-locations">
+            <button
+              id="search-location-button"
+              className="search-locations-button"
+            >
+              Search for places
+            </button>
+            <div className="icon-container">
+              <span className="material-icons">my_location</span>
+            </div>
+          </div>
+        </div>
+        <div className="sidebar-sky-wrapper">
+          <div className="sidebar-sky"></div>
+          <div className="image-container">
+            <img
+              src="https://www.metaweather.com//static/img/weather/lc.svg"
+              alt="weather"
+            ></img>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default App;
