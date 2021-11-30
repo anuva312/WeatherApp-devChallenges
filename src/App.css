@@ -1,38 +1,86 @@
+/* Styles common for Entire Page */
 .App {
-  text-align: center;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button {
+  cursor: pointer;
+  font-family: Raleway;
+  font-style: normal;
+  border: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.material-icons {
+  align-self: center;
 }
+/* End of styles common for Entire Page */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* SideBar Styles */
+.sidebar {
+  width: 30%;
+  height: 100vh;
+  background-color: #1e213a;
+}
+/* Search for Locations */
+.sidebar-header {
+  padding: 5% 8%;
+}
+.search-locations {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  color: #e7e7eb;
+}
+.search-locations-button {
+  padding: 2% 5%;
+  align-self: center;
+  height: 40px;
+  background: #6e707a;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #e7e7eb;
+  font-weight: 500;
+  font-size: 16px;
+}
+.search-locations-button:hover {
+  background-color: #c88c32;
+  box-shadow: none;
+}
+.icon-container {
+  cursor: pointer;
+  background: #6e707a;
+  border-radius: 50%;
+  height: 33px;
+  width: 33px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
-.App-link {
-  color: #61dafb;
+.icon-container:hover {
+  background-color: #c88c32;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Weather of Selected Location */
+.sidebar-sky-wrapper {
+  position: relative;
+  height: 325px;
+  width: 100%;
 }
+.sidebar-sky {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: url("images/Cloud-background.png");
+  background-size: contain;
+  background-repeat: repeat-y;
+  filter: opacity(0.1) drop-shadow(0 0 0 #1e213a);
+}
+.sidebar-sky > img {
+  width: 100%;
+}
+.image-container {
+  left: 40%;
+  position: absolute;
+  width: 25%;
+  top: 128.28px;
+  height: 100%;
+}
+/* End of SideBar Styles */
