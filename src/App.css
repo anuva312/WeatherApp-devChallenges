@@ -14,12 +14,15 @@ button {
 .material-icons {
   align-self: center;
 }
+div {
+  text-align: center;
+}
 /* End of styles common for Entire Page */
 
 /* SideBar Styles */
 .sidebar {
   width: 30%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #1e213a;
 }
 /* Search for Locations */
@@ -47,6 +50,7 @@ button {
 }
 .icon-container {
   cursor: pointer;
+  padding: 2px;
   background: #6e707a;
   border-radius: 50%;
   height: 33px;
@@ -82,5 +86,51 @@ button {
   width: 25%;
   top: 128.28px;
   height: 100%;
+}
+/* Today's Weather */
+.temp-today {
+  font-weight: 500;
+  font-size: 144px;
+  color: #e7e7eb;
+}
+.temp-unit {
+  font-size: 45px;
+  color: #a09fb1;
+}
+.weather-state-name {
+  font-weight: 600;
+  font-size: 36px;
+  color: #a09fb1;
+  padding: 70px 0;
+}
+.date-container,
+.location-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 18px;
+  color: #88869d;
+}
+.location-container {
+  padding: 10px 0 0;
+}
+span.location-name {
+  align-self: center;
+}
+.date::before {
+  content: "\2219";
+  padding: 0 15px;
+}
+/* Choose Location */
+.search-location-container {
+  color: #e7e7eb;
+}
+.search-location-header {
+  text-align: right;
+  padding: 10px 25px;
+  font-size: 24px;
+}
+.close-button {
+  cursor: pointer;
 }
 /* End of SideBar Styles */
