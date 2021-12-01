@@ -10,12 +10,19 @@ button {
   font-family: Raleway;
   font-style: normal;
   border: none;
+  background-color: transparent;
 }
 .material-icons {
   align-self: center;
 }
 div {
   text-align: center;
+}
+.error {
+  text-align: left;
+  color: tomato;
+  font-size: 14px;
+  padding: 10px 0;
 }
 /* End of styles common for Entire Page */
 
@@ -124,13 +131,65 @@ span.location-name {
 /* Choose Location */
 .search-location-container {
   color: #e7e7eb;
+  margin: 0 30px;
 }
 .search-location-header {
   text-align: right;
-  padding: 10px 25px;
+  padding: 10px 0;
   font-size: 24px;
 }
 .close-button {
   cursor: pointer;
+}
+.search-box {
+  margin-bottom: 25px;
+}
+.select-location-container {
+  display: flex;
+  justify-content: space-between;
+}
+.select-location-button {
+  text-align: left;
+  padding: 10px;
+  width: 60%;
+  color: #616475;
+  font-size: 19px;
+  border: 2px solid #616475;
+}
+.select-location-button:hover {
+  border-color: #e7e7eb;
+}
+.placeholder {
+  align-self: center;
+  padding-left: 5px;
+}
+.search-button {
+  color: #e7e7eb;
+  font-size: 19px;
+  background-color: #3c47e9;
+  padding: 10px 5px;
+  width: 30%;
+}
+.select-button-contents {
+  display: flex;
+}
+.selected-option {
+  color: #e7e7eb;
+}
+.select-location-options {
+  font-size: 19px;
+  padding: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+.select-location-options:hover {
+  border: 1px solid #616475;
+  cursor: pointer;
+}
+.select-location-options:hover::after {
+  content: ">";
+  text-align: right;
+  float: right;
 }
 /* End of SideBar Styles */

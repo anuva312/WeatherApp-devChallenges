@@ -3,7 +3,6 @@ import "./App.css";
 
 const options = {
   weekday: "short",
-  // year: "numeric",
   month: "short",
   day: "numeric",
 };
@@ -12,7 +11,9 @@ function App() {
   const [position, setPosition] = useState();
   const [nearByCities, setNearByCities] = useState();
   const [selectedCity, setSelectedCity] = useState();
+  const [showOptions, setShowOptions] = useState(false);
   const [selectedSearchCityOption, setSelectedSearchCityOption] = useState();
+  const [isEmpty, setIsEmpty] = useState(false);
   const [weather, setWeather] = useState();
   const [isSearchLocation, setIsSearchLocation] = useState(false);
   const [isCelcius, setIsCelcius] = useState(true);
@@ -29,6 +30,16 @@ function App() {
 
   const geoFail = function () {
     console.log("Unable to retrieve your location");
+  };
+
+  const handleSelectLocation = function () {
+    if (selectedSearchCityOption) {
+      setSelectedCity(selectedSearchCityOption);
+      setSelectedSearchCityOption(null);
+      setIsSearchLocation(false);
+    } else {
+      setIsEmpty(true);
+    }
   };
 
   useEffect(() => {
@@ -49,7 +60,7 @@ function App() {
           .filter((e) => e.location_type === "City")
           .map((c) => ({ name: c.title, woeid: c.woeid }));
         setSelectedCity(cities[0]);
-        setNearByCities(cities);
+        setNearByCities(cities.slice(1));
       } catch (error) {
         console.log(error);
       }
@@ -79,27 +90,59 @@ function App() {
             <div className="search-location-header">
               <span
                 className="material-icons close-button"
-                onClick={() => setIsSearchLocation(false)}
+                onClick={() => {
+                  setIsSearchLocation(false);
+                  setIsEmpty(false);
+                }}
               >
                 close
               </span>
             </div>
             <div className="search-box">
-              {/* <select
-                id="search-cities"
-                className="select-input"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setSelectedSearchCityOption(e.target.value);
-                }}
-              >
-                {nearByCities.map((city) => (
-                  <option value={city.woeid} key={city.woeid}>
-                    {city.name}
-                  </option>
-                ))}
-              </select> */}
+              <div className="select-location-container">
+                <button
+                  id="search-cities"
+                  className="select-location-button"
+                  onClick={() => {
+                    setShowOptions(true);
+                  }}
+                >
+                  {selectedSearchCityOption ? (
+                    <span className="selected-option">
+                      {selectedSearchCityOption.name}
+                    </span>
+                  ) : (
+                    <div className="select-button-contents">
+                      <span className="material-icons">search</span>
+                      <span className="placeholder"> search nearby cities</span>
+                    </div>
+                  )}
+                </button>
+                <button
+                  className="search-button"
+                  onClick={() => handleSelectLocation()}
+                >
+                  Search
+                </button>
+              </div>
+              {isEmpty ? <div className="error">Select a location</div> : null}
             </div>
+
+            {showOptions
+              ? nearByCities.map((city) => (
+                  <div
+                    id={`option_${city.woeid}`}
+                    key={city.woeid}
+                    className="select-location-options"
+                    onClick={() => {
+                      setSelectedSearchCityOption(city);
+                      setIsEmpty(false);
+                    }}
+                  >
+                    {city.name}
+                  </div>
+                ))
+              : null}
           </div>
         ) : (
           <div className="today-weather-container">
