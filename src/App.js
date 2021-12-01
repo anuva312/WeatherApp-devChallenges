@@ -1,18 +1,29 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+const options = {
+  weekday: "short",
+  // year: "numeric",
+  month: "short",
+  day: "numeric",
+};
+
 function App() {
   const [position, setPosition] = useState();
   const [nearByCities, setNearByCities] = useState();
   const [selectedCity, setSelectedCity] = useState();
+  const [selectedSearchCityOption, setSelectedSearchCityOption] = useState();
+  const [weather, setWeather] = useState();
+  const [isSearchLocation, setIsSearchLocation] = useState(false);
+  const [isCelcius, setIsCelcius] = useState(true);
 
   const geoSuccess = function (position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log("Latitude: ", latitude, " Longitude: ", longitude);
+    const lat = position.coords.latitude;
+    const long = position.coords.longitude;
+    console.log("Latitude: ", lat, " Longitude: ", long);
     setPosition({
-      latitude,
-      longitude,
+      latitude: lat,
+      longitude: long,
     });
   };
 
@@ -37,7 +48,7 @@ function App() {
         const cities = nearbyLocations
           .filter((e) => e.location_type === "City")
           .map((c) => ({ name: c.title, woeid: c.woeid }));
-        setSelectedCity(cities[0].woeid);
+        setSelectedCity(cities[0]);
         setNearByCities(cities);
       } catch (error) {
         console.log(error);
@@ -49,9 +60,10 @@ function App() {
   useEffect(() => {
     async function getWeather() {
       try {
-        const getWeatherAPI = `https://www.metaweather.com/api/location/${selectedCity}/`;
+        const getWeatherAPI = `https://www.metaweather.com/api/location/${selectedCity.woeid}/`;
         const weather = await (await fetch(getWeatherAPI)).json();
         console.log(weather);
+        setWeather(weather.consolidated_weather);
       } catch (error) {
         console.log(error);
       }
@@ -62,28 +74,94 @@ function App() {
   return (
     <div className="App">
       <div className="sidebar">
-        <div className="sidebar-header">
-          <div className="search-locations">
-            <button
-              id="search-location-button"
-              className="search-locations-button"
-            >
-              Search for places
-            </button>
-            <div className="icon-container">
-              <span className="material-icons">my_location</span>
+        {isSearchLocation ? (
+          <div className="search-location-container">
+            <div className="search-location-header">
+              <span
+                className="material-icons close-button"
+                onClick={() => setIsSearchLocation(false)}
+              >
+                close
+              </span>
+            </div>
+            <div className="search-box">
+              {/* <select
+                id="search-cities"
+                className="select-input"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setSelectedSearchCityOption(e.target.value);
+                }}
+              >
+                {nearByCities.map((city) => (
+                  <option value={city.woeid} key={city.woeid}>
+                    {city.name}
+                  </option>
+                ))}
+              </select> */}
             </div>
           </div>
-        </div>
-        <div className="sidebar-sky-wrapper">
-          <div className="sidebar-sky"></div>
-          <div className="image-container">
-            <img
-              src="https://www.metaweather.com//static/img/weather/lc.svg"
-              alt="weather"
-            ></img>
+        ) : (
+          <div className="today-weather-container">
+            <div className="sidebar-header">
+              <div className="search-locations">
+                <button
+                  id="search-location-button"
+                  className="search-locations-button"
+                  onClick={() => setIsSearchLocation(true)}
+                >
+                  Search for places
+                </button>
+                <div
+                  className="icon-container"
+                  onClick={() =>
+                    navigator.geolocation.getCurrentPosition(
+                      geoSuccess,
+                      geoFail
+                    )
+                  }
+                >
+                  <span className="material-icons">my_location</span>
+                </div>
+              </div>
+            </div>
+            <div className="sidebar-sky-wrapper">
+              <div className="sidebar-sky"></div>
+              <div className="image-container">
+                {weather ? (
+                  <img
+                    src={`https://www.metaweather.com//static/img/weather/${weather[0].weather_state_abbr}.svg`}
+                    alt="weather"
+                  ></img>
+                ) : null}
+              </div>
+            </div>
+            {weather ? (
+              <div>
+                <div className="temp-today">
+                  <span>{`${Math.round(weather[0].the_temp)}`}</span>
+                  <span className="temp-unit">{isCelcius ? "°C" : "°F"}</span>
+                </div>
+                <div className="weather-state-name">
+                  {weather[0].weather_state_name}
+                </div>
+                <div className="date-container">
+                  <div>Today</div>
+                  <div className="date">
+                    {new Date(weather[0].applicable_date).toLocaleDateString(
+                      "en-GB",
+                      options
+                    )}
+                  </div>
+                </div>
+                <div className="location-container">
+                  <span className="material-icons">location_on</span>
+                  <span className="location-name">{selectedCity.name}</span>
+                </div>
+              </div>
+            ) : null}
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
