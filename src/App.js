@@ -32,11 +32,19 @@ function App() {
     console.log("Unable to retrieve your location");
   };
 
+  const handleClose = function () {
+    setShowOptions(false);
+    setIsSearchLocation(false);
+    setIsEmpty(false);
+    setSelectedSearchCityOption(null);
+  };
+
   const handleSelectLocation = function () {
     if (selectedSearchCityOption) {
       setSelectedCity(selectedSearchCityOption);
       setSelectedSearchCityOption(null);
       setIsSearchLocation(false);
+      setShowOptions(false);
     } else {
       setIsEmpty(true);
     }
@@ -90,10 +98,7 @@ function App() {
             <div className="search-location-header">
               <span
                 className="material-icons close-button"
-                onClick={() => {
-                  setIsSearchLocation(false);
-                  setIsEmpty(false);
-                }}
+                onClick={() => handleClose()}
               >
                 close
               </span>
