@@ -4,6 +4,7 @@
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
+  display: flex;
 }
 button {
   cursor: pointer;
@@ -193,3 +194,35 @@ span.location-name {
   float: right;
 }
 /* End of SideBar Styles */
+
+/* Main Content */
+.main-content {
+  margin: 1% 5%;
+  width: 100%;
+}
+.header {
+  float: right;
+  display: flex;
+}
+.temp-unit-selector {
+  cursor: pointer;
+  padding: 2px;
+  background: #585676;
+  border-radius: 50%;
+  height: 33px;
+  width: 33px;
+  display: flex;
+  justify-content: center;
+  color: #e7e7eb;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 10px;
+}
+.temp-unit-selector.selected {
+  color: #110e3c;
+  background: #e7e7eb;
+}
+.temp-unit-selector > span {
+  align-self: center;
+}
+/* End of Main Content */

@@ -7,6 +7,10 @@ const options = {
   day: "numeric",
 };
 
+const convertToFarenheit = function (celcius) {
+  return celcius * 1.8 + 32;
+};
+
 function App() {
   const [position, setPosition] = useState();
   const [nearByCities, setNearByCities] = useState();
@@ -187,7 +191,11 @@ function App() {
             {weather ? (
               <div>
                 <div className="temp-today">
-                  <span>{`${Math.round(weather[0].the_temp)}`}</span>
+                  <span>{`${
+                    isCelcius
+                      ? Math.round(weather[0].the_temp)
+                      : Math.round(convertToFarenheit(weather[0].the_temp))
+                  }`}</span>
                   <span className="temp-unit">{isCelcius ? "°C" : "°F"}</span>
                 </div>
                 <div className="weather-state-name">
@@ -210,6 +218,22 @@ function App() {
             ) : null}
           </div>
         )}
+      </div>
+      <div className="main-content">
+        <div className="header">
+          <div
+            className={`temp-unit-selector ${isCelcius ? "selected" : ""}`}
+            onClick={() => setIsCelcius(true)}
+          >
+            <span>°C</span>
+          </div>
+          <div
+            className={`temp-unit-selector ${isCelcius ? "" : "selected"}`}
+            onClick={() => setIsCelcius(false)}
+          >
+            <span>°F</span>
+          </div>
+        </div>
       </div>
     </div>
   );
