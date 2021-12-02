@@ -234,6 +234,47 @@ function App() {
             <span>°F</span>
           </div>
         </div>
+
+        {weather ? (
+          <div className="day-weather-cards-container">
+            {weather.slice(1).map((day, index) => (
+              <div className="day-cards" key={day.id}>
+                <div className="weather-date">
+                  {index === 0
+                    ? "Tomorrow"
+                    : new Date(day.applicable_date).toLocaleDateString(
+                        "en-GB",
+                        options
+                      )}
+                </div>
+                <div className="day-image-container">
+                  <img
+                    src={`https://www.metaweather.com//static/img/weather/${day.weather_state_abbr}.svg`}
+                    alt="weather"
+                  ></img>
+                </div>
+                <div className="min-max-temp-container">
+                  <div>
+                    <span>{`${
+                      isCelcius
+                        ? Math.round(day.max_temp)
+                        : Math.round(convertToFarenheit(day.max_temp))
+                    }`}</span>
+                    <span>{isCelcius ? "°C" : "°F"}</span>
+                  </div>
+                  <div className="min-temp">
+                    <span>{`${
+                      isCelcius
+                        ? Math.round(day.min_temp)
+                        : Math.round(convertToFarenheit(day.min_temp))
+                    }`}</span>
+                    <span>{isCelcius ? "°C" : "°F"}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );

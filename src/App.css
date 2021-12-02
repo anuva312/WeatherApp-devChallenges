@@ -25,6 +25,9 @@ div {
   font-size: 14px;
   padding: 10px 0;
 }
+img {
+  width: 100%;
+}
 /* End of styles common for Entire Page */
 
 /* SideBar Styles */
@@ -84,9 +87,6 @@ div {
   background-size: contain;
   background-repeat: repeat-y;
   filter: opacity(0.1) drop-shadow(0 0 0 #1e213a);
-}
-.sidebar-sky > img {
-  width: 100%;
 }
 .image-container {
   left: 40%;
@@ -197,12 +197,13 @@ span.location-name {
 
 /* Main Content */
 .main-content {
-  margin: 1% 5%;
+  margin: 1% 3%;
   width: 100%;
 }
 .header {
-  float: right;
+  justify-content: right;
   display: flex;
+  margin-bottom: 50px;
 }
 .temp-unit-selector {
   cursor: pointer;
@@ -224,5 +225,30 @@ span.location-name {
 }
 .temp-unit-selector > span {
   align-self: center;
+}
+.day-weather-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.day-cards {
+  min-width: 120px;
+  min-height: 100px;
+  color: #e7e7eb;
+  background-color: #1e213a;
+  margin: 0 25px 50px;
+  padding: 20px;
+}
+.day-image-container {
+  width: 56.44px;
+  height: 62px;
+  margin: 25px auto;
+}
+.min-max-temp-container {
+  display: flex;
+  justify-content: space-between;
+}
+.min-temp {
+  color: #a09fb1;
 }
 /* End of Main Content */
