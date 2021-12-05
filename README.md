@@ -57,12 +57,15 @@ Find the site in action [here]()!
 #### Mobile Views
 
 Mobile View Part 1
+
 ![mobile-view-1](public/assets/images/mobile-view-1.PNG)
 
 Mobile View Part 2
+
 ![mobile-view-2](public/assets/images/mobile-view-2.PNG)
 
 Mobile View Part 3
+
 ![mobile-view-3](public/assets/images/mobile-view-3.PNG)
 
 ### Built With
@@ -91,5 +94,5 @@ $ yarn start
 ## Acknowledgements
 
 - [Weather API](https://www.metaweather.com/api/)
-- [For Loader](https://loading.io/css/)
-- [For Progress Bar](https://jsfiddle.net/c0481hkp/9/)
+- [Loader](https://loading.io/css/)
+- [Progress Bar](https://jsfiddle.net/c0481hkp/9/)
