@@ -40,7 +40,7 @@ Fulfill user stories below:
 
 ### Demo
 
-Find the site in action [here]()!
+Find the site in action [here](https://keen-goldwasser-9930f9.netlify.app/)!
 
 #### Main Page
 
