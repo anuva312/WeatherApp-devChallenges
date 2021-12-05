@@ -25,7 +25,6 @@ function App() {
   const geoSuccess = function (position) {
     const lat = position.coords.latitude;
     const long = position.coords.longitude;
-    console.log("Latitude: ", lat, " Longitude: ", long);
     setPosition({
       latitude: lat,
       longitude: long,
@@ -85,7 +84,6 @@ function App() {
       try {
         const getWeatherAPI = `https://www.metaweather.com/api/location/${selectedCity.woeid}/`;
         const weather = await (await fetch(getWeatherAPI)).json();
-        console.log(weather);
         setWeather(weather.consolidated_weather);
       } catch (error) {
         console.log(error);
