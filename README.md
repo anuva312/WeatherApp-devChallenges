@@ -80,7 +80,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [y
 
 ```bash
 # Clone this repository
-$ git clone
+$ git clone https://github.com/anuva312/WeatherApp-devChallenges
 
 # Install dependencies
 $ yarn install
