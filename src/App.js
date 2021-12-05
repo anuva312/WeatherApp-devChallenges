@@ -236,45 +236,120 @@ function App() {
         </div>
 
         {weather ? (
-          <div className="day-weather-cards-container">
-            {weather.slice(1).map((day, index) => (
-              <div className="day-cards" key={day.id}>
-                <div className="weather-date">
-                  {index === 0
-                    ? "Tomorrow"
-                    : new Date(day.applicable_date).toLocaleDateString(
-                        "en-GB",
-                        options
-                      )}
-                </div>
-                <div className="day-image-container">
-                  <img
-                    src={`https://www.metaweather.com//static/img/weather/${day.weather_state_abbr}.svg`}
-                    alt="weather"
-                  ></img>
-                </div>
-                <div className="min-max-temp-container">
-                  <div>
-                    <span>{`${
-                      isCelcius
-                        ? Math.round(day.max_temp)
-                        : Math.round(convertToFarenheit(day.max_temp))
-                    }`}</span>
-                    <span>{isCelcius ? "°C" : "°F"}</span>
+          <div>
+            <div className="day-weather-cards-container">
+              {weather.slice(1).map((day, index) => (
+                <div className="day-cards" key={day.id}>
+                  <div className="weather-date">
+                    {index === 0
+                      ? "Tomorrow"
+                      : new Date(day.applicable_date).toLocaleDateString(
+                          "en-GB",
+                          options
+                        )}
                   </div>
-                  <div className="min-temp">
-                    <span>{`${
-                      isCelcius
-                        ? Math.round(day.min_temp)
-                        : Math.round(convertToFarenheit(day.min_temp))
-                    }`}</span>
-                    <span>{isCelcius ? "°C" : "°F"}</span>
+                  <div
+                    className="day-image-container"
+                    title={day.weather_state_name}
+                  >
+                    <img
+                      src={`https://www.metaweather.com//static/img/weather/${day.weather_state_abbr}.svg`}
+                      alt="weather"
+                    ></img>
                   </div>
+                  <div className="min-max-temp-container">
+                    <div title="Maximum temperature">
+                      <span>{`${
+                        isCelcius
+                          ? Math.round(day.max_temp)
+                          : Math.round(convertToFarenheit(day.max_temp))
+                      }`}</span>
+                      <span>{isCelcius ? "°C" : "°F"}</span>
+                    </div>
+                    <div className="min-temp" title="Minimum temperature">
+                      <span>{`${
+                        isCelcius
+                          ? Math.round(day.min_temp)
+                          : Math.round(convertToFarenheit(day.min_temp))
+                      }`}</span>
+                      <span>{isCelcius ? "°C" : "°F"}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="highlights-heading">Today's Highlights</div>
+            <div className="highlights-container">
+              <div className="highlight-card">
+                <div className="title">Wind Status</div>
+                <div className="main-reading">{`${Math.round(
+                  weather[0].wind_speed
+                )} mph`}</div>
+                <div className="flex-icon">
+                  <div className={`icon-container-direction`}>
+                    <span className="material-icons">near_me</span>
+                  </div>
+                  <span className="wind-direction">
+                    {weather[0].wind_direction_compass}
+                  </span>
                 </div>
               </div>
-            ))}
+              <div className="highlight-card">
+                <div className="title">Humidity</div>
+                <div className="main-reading">{`${Math.round(
+                  weather[0].humidity
+                )} %`}</div>
+                <div className="indicator-container">
+                  <div className="indicator-divisions">
+                    <span>0</span>
+                    <span>50</span>
+                    <span>100</span>
+                  </div>
+                  <progress
+                    id="humidity-indicator"
+                    value={weather[0].humidity}
+                    max="100"
+                  ></progress>
+                  <div className="humidity-unit">%</div>
+                </div>
+              </div>
+              <div className="highlight-card">
+                <div className="title">Visibility</div>
+                <div className="main-reading">{`${parseFloat(
+                  weather[0].visibility
+                ).toFixed(1)} miles`}</div>
+              </div>
+              <div className="highlight-card">
+                <div className="title">Air Pressure</div>
+                <div className="main-reading">{`${Math.round(
+                  weather[0].air_pressure
+                )} mb`}</div>
+              </div>
+            </div>
           </div>
-        ) : null}
+        ) : (
+          <div className="loader-container">
+            <div className="lds-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        )}
+        <div className="footer">
+          created by
+          <a href="https://devchallenges.io/portfolio/anuva312"> anuva312</a> -
+          devChallenges.io
+        </div>
       </div>
     </div>
   );
