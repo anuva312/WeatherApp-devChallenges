@@ -32,7 +32,7 @@ function App() {
   };
 
   const geoFail = function () {
-    console.log("Unable to retrieve your location");
+    alert("Unable to retrieve your location");
   };
 
   const handleClose = function () {
@@ -56,7 +56,7 @@ function App() {
   useEffect(() => {
     const geo = navigator.geolocation;
     if (!geo) {
-      console.log("Geolocation is not supported by your browser");
+      alert("Geolocation is not supported by your browser");
     } else {
       geo.getCurrentPosition(geoSuccess, geoFail);
     }
@@ -65,7 +65,7 @@ function App() {
   useEffect(() => {
     async function fetchNearByLocations() {
       try {
-        const searchLoactionAPI = `https://www.metaweather.com/api/location/search/?lattlong=${position.latitude},${position.longitude}`;
+        const searchLoactionAPI = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?lattlong=${position.latitude},${position.longitude}`;
         const nearbyLocations = await (await fetch(searchLoactionAPI)).json();
         const cities = nearbyLocations
           .filter((e) => e.location_type === "City")
@@ -74,6 +74,9 @@ function App() {
         setNearByCities(cities.slice(1));
       } catch (error) {
         console.log(error);
+        const message =
+          "Please go to https://cors-anywhere.herokuapp.com/corsdemo and click on the button  'Request temporary access to the demo server button'  and come back and refresh this page";
+        alert(message);
       }
     }
     if (position) fetchNearByLocations();
@@ -82,7 +85,7 @@ function App() {
   useEffect(() => {
     async function getWeather() {
       try {
-        const getWeatherAPI = `https://www.metaweather.com/api/location/${selectedCity.woeid}/`;
+        const getWeatherAPI = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${selectedCity.woeid}/`;
         const weather = await (await fetch(getWeatherAPI)).json();
         setWeather(weather.consolidated_weather);
       } catch (error) {
@@ -136,17 +139,17 @@ function App() {
             </div>
 
             {showOptions
-              ? nearByCities.map((city) => (
+              ? nearByCities?.map((city) => (
                   <div
-                    id={`option_${city.woeid}`}
-                    key={city.woeid}
+                    id={`option_${city?.woeid}`}
+                    key={city?.woeid}
                     className="select-location-options"
                     onClick={() => {
                       setSelectedSearchCityOption(city);
                       setIsEmpty(false);
                     }}
                   >
-                    {city.name}
+                    {city?.name}
                   </div>
                 ))
               : null}
