@@ -1,6 +1,6 @@
 # Country
 
-Solution for the [Weather App Challenge](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv) from [Devchallenges.io](https://devchallenges.io).
+Solution for the [Weather App Challenge](https://legacy.devchallenges.io/challenges/mM1UIenRhK808W8qmLWv) from [Devchallenges.io](https://legacy.devchallenges.io).
 
 <!-- TABLE OF CONTENTS -->
 
